@@ -25,13 +25,34 @@ class TodoController extends Controller
 
     public function create()
     {
-        return view('todos.create');
+
+        // Render the Inertia.js component for creating a new todo
+        return Inertia::render('todos/create', [
+            'users' => \App\Models\User::all(), // Fetch all users for the select dropdown
+        ]);
     }
 
     public function store(Request $request)
     {
-        // Logic to store the todo item
-        return redirect()->route('todos.index');
+        // Logic to store a new todo item
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'due_date' => 'nullable|date',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        // Create a new todo item
+        Todo::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'due_date' => $request->due_date,
+            'is_complete' =>  false, 
+            'user_id' => $request->user_id,
+        ]);
+
+        // Redirect back to the todos index page with a success message
+        return redirect()->route('todos.index')->with('success', 'Todo created successfully.');
     }
 
     public function show($id)

@@ -17,7 +17,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('todos.index');
 
 
+
     Route::put('/todos/{id}/toggle-complete', [TodoController::class, 'toggleComplete'])->name('todos.toggle-complete');
+
+    Route::get('todos/create', [TodoController::class, 'create'])
+        ->name('todos.create');
+
+    Route::post('todos/create', [TodoController::class, 'store'])
+        ->name('todos.store');
 });
 
 require __DIR__ . '/settings.php';

@@ -2,7 +2,8 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { router } from '@inertiajs/react';
-
+import { Button } from '@/components/ui/button';
+import { Link } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -41,6 +42,19 @@ export default function TodosIndex({ todos }: { todos: Todo[] }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Todos" />
+  
+            {/* Add New Todo Button */}
+            <div className="flex justify-end mb-4">
+                <Link
+                    href="/todos/create"
+                 
+                >
+                      <Button variant="primary" className="bg-blue-500 hover:bg-blue-600">
+                        Add New Todo
+                    </Button>
+                </Link>
+            </div>
+         
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
                 <div className="grid auto-rows-min gap-4 md:grid-cols-3">
                     {todos.data.map((todo) => (
