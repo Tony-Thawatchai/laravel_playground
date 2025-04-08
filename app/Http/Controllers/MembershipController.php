@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Customer;
 use App\Models\Membership;
-use App\Models\Restaurant;
-use App\Models\Todo;
+use App\Models\restaurant;
 
 use function Laravel\Prompts\error;
 
