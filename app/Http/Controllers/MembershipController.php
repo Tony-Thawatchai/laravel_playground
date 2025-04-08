@@ -26,8 +26,11 @@ class MembershipController extends Controller
             error_log('Validation failed: restaurant_id is required');
             return redirect()->route('memberships.create')->with('error', 'Restaurant ID is required.');
         }
+
+        error_log('Restaurant ID: ' . $restaurant_id);
         // Fetch the specific restaurant by its ID
         $restaurant = Restaurant::findOrFail($restaurant_id);
+        error_log('Restaurant: ' . json_encode($restaurant));
 
         // Render the Inertia.js component for creating a new membership
         return Inertia::render('memberships/signup', [
