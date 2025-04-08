@@ -4,9 +4,16 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\TodoController;
 
+use App\Http\Controllers\MembershipController;
+
+
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
+
+// route for sign up as a member for a specific restaurant
+Route::get('membership/signup/{restaurant_id}', [MembershipController::class, 'create'])->name('memberships.create');
+Route::post('membership/signup/{restaurant_id}', [MembershipController::class, 'store'])->name('memberships.store');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

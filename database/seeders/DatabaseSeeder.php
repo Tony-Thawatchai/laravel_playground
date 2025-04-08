@@ -22,6 +22,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             TodoSeeder::class,
+            // Add other seeders here if needed
+            OwnerSeeder::class,
+            RestaurantSeeder::class,
+            CustomerSeeder::class,
+
+
         ]);
     }
 }
